@@ -1,0 +1,12 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "description": "Playwright Automation for Data Generation",
+  "scripts": {
+    "generate": "node generate_bookings.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "@faker-js/faker": "^8.3.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "migration-service",
+  "version": "1.0.0",
+  "description": "DB-to-DB One-Time Migration Script",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mongodb": "^6.3.0",
+    "pg": "^8.11.3"
+  }
+}

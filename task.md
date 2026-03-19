@@ -1,0 +1,34 @@
+# Hotel Booking Migration Tasks
+
+- [x] Planning & Design
+  - [x] Write implementation plan and review with user
+  - [x] Finalize Docker Compose definitions for (Postgres, MongoDB, Kafka)
+- [ ] Infrastructure Setup
+  - [x] Create `docker-compose.yml` for databases and message broker
+  - [x] Set up initialization scripts for Postgres (schema for hotels, rooms, bookings, outbox) and MongoDB
+- [ ] Backend Microservices (Relational)
+  - [ ] Initialize `booking-api` (Node.js/Express)
+  - [ ] Implement robust REST APIs (Create Booking, Get Bookings, Search Hotels)
+  - [ ] Complete database connection and models (Sequelize / pg)
+- [ ] Web Application Frontend
+  - [ ] Initialize React frontend using Vite
+  - [ ] Build UI to browse hotels, view rooms, and submit bookings
+  - [ ] Integrate with `booking-api`
+- [ ] Initial Data Migration (DB to DB)
+  - [ ] Build `migration-service` script
+  - [ ] Extract from Postgres, perform transformations
+  - [ ] Load directly into MongoDB
+- [ ] CDC Pipeline (Message Broker + Microservices)
+  - [ ] Implement `cdc-publisher` to read incremental changes (e.g., from an outbox table) and publish to Kafka
+  - [ ] Implement `cdc-subscriber` to consume Kafka messages, call API for details, transform, and load to MongoDB
+- [ ] Search Service (NoSQL)
+  - [ ] Implement `search-api` querying MongoDB directly so demo shows newly loaded data
+  - [ ] Add Search UI component to React app to interact with `search-api`
+- [ ] Playwright Automation
+  - [ ] Initialize `automation` directory
+  - [ ] Write Playwright scripts to generate bookings for 3 years into the future via UI/APIs
+- [ ] Demo Flow
+  - [ ] Script to clear NoSQL DB
+  - [ ] Script to trigger One-Time Data Migration
+  - [ ] Script or UI to demonstrate searching the new data
+  - [ ] Provide instructions for the final demo

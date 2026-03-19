@@ -1,0 +1,14 @@
+{
+  "name": "hotel-migration-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "cd booking-api && npm install && cd ../frontend && npm install && cd ../migration-service && npm install && cd ../cdc-service && npm install && cd ../automation && npm install",
+    "start:backend": "cd booking-api && node index.js",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:cdc-publisher": "cd cdc-service && node publisher.js",
+    "start:cdc-subscriber": "cd cdc-service && node subscriber.js",
+    "start:search-api": "cd cdc-service && node search-api.js",
+    "run:migration": "cd migration-service && node index.js",
+    "run:automation": "cd automation && node generate_bookings.js"
+  }
+}
