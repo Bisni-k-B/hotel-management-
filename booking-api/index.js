@@ -41,9 +41,9 @@ app.post('/api/bookings', async (req, res) => {
   const client = await db.pool.connect();
   try {
     await client.query('BEGIN');
-    
+
     const { hotel_id, room_id, customer_name, customer_email, start_date, end_date, total_price } = req.body;
-    
+
     const bookingQuery = `
       INSERT INTO bookings (hotel_id, room_id, customer_name, customer_email, start_date, end_date, total_price)
       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id
@@ -97,11 +97,11 @@ app.get('/api/bookings/:id', async (req, res) => {
 app.post('/api/chat', async (req, res) => {
   try {
     const { message, history } = req.body;
-    
+
     // Check if API key is provided
     if (!process.env.GROQ_API_KEY) {
-      return res.json({ 
-        reply: "To experience the full AI Concierge, please add your `GROQ_API_KEY` to the `booking-api/.env` file. For now, I'm happily running in offline demo mode!" 
+      return res.json({
+        reply: "To experience the full AI Concierge, please add your `GROQ_API_KEY` to the `booking-api/.env` file. For now, I'm happily running in offline demo mode!"
       });
     }
 
@@ -116,20 +116,20 @@ Keep answers concise, extremely helpful, and try to assist the user in finding a
 If they ask about prices, suggest they click "Reserve Room" on the UI to see live rates.`;
 
     const messages = [
-        { role: 'system', content: systemPrompt },
-        { role: 'assistant', content: "Hello! I am Aura, your premium concierge. How can I assist you with your stay today?" },
-        ...history.map(m => ({
-            role: m.role === 'model' ? 'assistant' : 'user',
-            content: m.parts[0].text
-        })),
-        { role: 'user', content: message }
+      { role: 'system', content: systemPrompt },
+      { role: 'assistant', content: "Hello! I am Aura, your premium concierge. How can I assist you with your stay today?" },
+      ...history.map(m => ({
+        role: m.role === 'model' ? 'assistant' : 'user',
+        content: m.parts[0].text
+      })),
+      { role: 'user', content: message }
     ];
 
     const response = await groq.chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
-        messages: messages,
-        temperature: 0.7,
-        max_tokens: 1024,
+      model: 'llama-3.3-70b-versatile',
+      messages: messages,
+      temperature: 0.7,
+      max_tokens: 1024,
     });
 
     res.json({ reply: response.choices[0].message.content });
